@@ -1,0 +1,155 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: bisque;
+  font-family: "Roboto", sans-serif;
+}
+
+.wrapper {
+  width: 400px;
+  margin: 30px auto;
+  background-color: rgb(255, 251, 247);
+  border-radius: 5px;
+  filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.2));
+}
+
+h2 {
+  text-align: center;
+  font-size: 3rem;
+  padding: 10px;
+  color: rgba(80, 27, 2, 0.5);
+}
+
+.input-block {
+  display: flex;
+  padding: 10px;
+  align-items: center;
+  justify-content: space-around;
+  padding-bottom: 30px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.btn {
+  width: 10%;
+  font-size: 2rem;
+}
+.input {
+  width: 85%;
+  padding: 5px;
+  font-size: 1.5rem;
+  outline: none;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.2));
+}
+
+.list-item {
+  text-decoration: none;
+
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  padding: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.text {
+  flex-basis: 90%;
+}
+
+.text--unactive {
+  text-decoration: line-through;
+  color: rgb(117, 117, 117);
+}
+
+.icon {
+  padding-right: 10px;
+}
+
+.delete {
+  border-color: red;
+  color: red;
+  border: 1px solid red;
+  border-radius: 10px;
+  font-size: 10px;
+  padding: 5px 10px;
+  cursor: pointer;
+  opacity: 0;
+  transition: all 0.2s ease-in-out;
+}
+
+.list-item:hover .delete {
+  opacity: 1;
+}
+
+.info-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.filter-link {
+  padding: 5px 10px;
+  border: 1px solid transparent;
+  margin: 5px;
+  transition: all 0.2s ease-in-out;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.filter-link:hover {
+  border: 1px solid rgb(128, 14, 14);
+}
+
+.sort {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  font-size: 2rem;
+}
+
+.fa-sort-alpha-down,
+.fa-sort-alpha-down-alt {
+  cursor: pointer;
+  padding: 5px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.fa-sort-alpha-down:hover,
+.fa-sort-alpha-down-alt:hover {
+  color: rgba(0, 0, 0, 1);
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+}
+
+.pagination-item {
+  cursor: pointer;
+  list-style: none;
+  padding: 5px;
+  margin: 10px;
+  border: 1px solid black;
+}
+
+.filter-link--current {
+  color: red;
+  border-color: red;
+}
+
+.sort-btn-current {
+  color: red;
+}
+
+.pagination-item--active {
+  color: red;
+  border-color: red;
+  font-weight: 900;
+}

@@ -31,24 +31,25 @@
         <ul></ul>
       </div>
       <div>
-        <ul class="pagination">
-          <!-- <li class="pagination-item">1</li>
-          <li class="pagination-item">2</li>
-          <li class="pagination-item">3</li> -->
-        </ul>
+        <ul class="pagination"></ul>
       </div>
       <div class="info-block">
         <div class="filter-link filter-link--all filter-link--current">All</div>
         <div class="filter-link filter-link--active">Active</div>
-        <div class="filter-link filter-link--complited">Complited</div>
+        <div class="filter-link filter-link--completed">Completed</div>
       </div>
     </div>
 
-    <script src="variables.js"></script>
-    <script src="Filter.js"></script>
-    <script src="Pagination.js"></script>
-    <script src="ToDoItem.js"></script>
-    <script src="Mediator.js"></script>
-    <script src="script.js"></script>
+    <script src="js/variables.js"></script>
+    <script src="js/Filter.js"></script>
+    <script src="js/Pagination.js"></script>
+    <script src="js/ToDoItem.js"></script>
+    <script src="js/AppController.js"></script>
+    <script>
+      window.addEventListener("DOMContentLoaded", function () {
+        AppControllerServises.init();
+        AppControllerServises.render();
+      });
+    </script>
   </body>
 </html>

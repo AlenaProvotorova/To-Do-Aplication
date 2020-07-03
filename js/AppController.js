@@ -18,24 +18,11 @@ AppController.state = {
   fromZtoA: 1,
 };
 
-AppController.prototype.init = function () {
-  toDoVariables.btnPlus.addEventListener("click", (e) => {
+AppController.prototype.addAction = function (elem, action) {
+  elem.addEventListener(action, (e) => {
     e.preventDefault = "";
 
-    if (toDoVariables.input.value == "") {
-      return false;
-    } else {
-      const todoItem = new ToDoItem(input.value);
-      AppControllerServises.addToDoitem(todoItem);
-
-      AppControllerServises.toLocal();
-      AppControllerServises.render();
-      toDoVariables.input.value = "";
-    }
-  });
-
-  toDoVariables.input.addEventListener("keydown", (e) => {
-    if (e.keyCode === 13) {
+    if (e.keyCode === 13 || !e.keyCode) {
       if (toDoVariables.input.value == "") {
         return false;
       } else {
@@ -48,24 +35,26 @@ AppController.prototype.init = function () {
       }
     }
   });
+};
+
+AppController.prototype.init = function () {
+  AppControllerServises.addAction(toDoVariables.btnPlus, "click");
+  AppControllerServises.addAction(toDoVariables.input, "keydown");
 
   toDoVariables.btnAll.addEventListener("click", () => {
     FilterOne.activeFilter = Filter.state.ALL;
     AppControllerServises.render();
-    localStorage.setItem("activeFilter", FilterOne.activeFilter);
   });
 
   toDoVariables.btnActive.addEventListener("click", () => {
     FilterOne.activeFilter = Filter.state.ACTIVE;
 
     AppControllerServises.render();
-    localStorage.setItem("activeFilter", FilterOne.activeFilter);
   });
 
   toDoVariables.btnCompleted.addEventListener("click", () => {
     FilterOne.activeFilter = Filter.state.INACTIVE;
     AppControllerServises.render();
-    localStorage.setItem("activeFilter", FilterOne.activeFilter);
   });
 
   toDoVariables.btnAlphaDown.addEventListener("click", () => {

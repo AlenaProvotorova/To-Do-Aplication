@@ -11,7 +11,11 @@ Pagination.prototype.removePaginationItem = function () {
 
 Pagination.prototype.createElement = function (elem) {
   const li = document.createElement("li");
-  li.className = "pagination-item";
+  const isActive = elem + 1 === this.activePage;
+  const activeClass = isActive ? "pagination-item--active" : undefined;
+
+  li.classList.add("pagination-item");
+  li.classList.add(activeClass);
   li.textContent = elem + 1;
 
   li.addEventListener("click", function () {
@@ -24,7 +28,7 @@ Pagination.prototype.createElement = function (elem) {
 
 Pagination.prototype.createFragment = function (arr) {
   if (arr.length <= this.pageSize) {
-    return;
+    return "";
   }
 
   const fragment = new DocumentFragment();

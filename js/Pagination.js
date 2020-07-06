@@ -21,7 +21,7 @@ Pagination.prototype.createElement = function (elem) {
   li.addEventListener("click", function () {
     PaginationList.activePage = elem + 1;
 
-    AppControllerServises.render();
+    AppController.render();
   });
   return li;
 };

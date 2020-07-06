@@ -1,4 +1,4 @@
-function AppController() {
+function App() {
   this.list = JSON.parse(localStorage.getItem("TODOList")) || [];
   this.activeSort = +localStorage.getItem("activeSort") || 0;
 }
@@ -13,12 +13,12 @@ function addBtnClass(elem, cl) {
   elem.classList.add(cl);
 }
 
-AppController.state = {
+App.state = {
   fromAtoZ: 0,
   fromZtoA: 1,
 };
 
-AppController.prototype.addAction = function (elem, action) {
+App.prototype.addAction = function (elem, action) {
   elem.addEventListener(action, (e) => {
     e.preventDefault = "";
 
@@ -27,9 +27,9 @@ AppController.prototype.addAction = function (elem, action) {
         return false;
       } else {
         const todoItem = new ToDoItem(toDoVariables.input.value);
-        AppControllerServises.addToDoitem(todoItem);
+        AppController.addToDoitem(todoItem);
 
-        AppControllerServises.render();
+        AppController.render();
 
         toDoVariables.input.value = "";
       }
@@ -37,76 +37,83 @@ AppController.prototype.addAction = function (elem, action) {
   });
 };
 
-AppController.prototype.init = function () {
-  AppControllerServises.addAction(toDoVariables.btnPlus, "click");
-  AppControllerServises.addAction(toDoVariables.input, "keydown");
+App.prototype.init = function () {
+  AppController.addAction(toDoVariables.btnPlus, "click");
+  AppController.addAction(toDoVariables.input, "keydown");
 
   toDoVariables.btnAll.addEventListener("click", () => {
     FilterOne.activeFilter = Filter.state.ALL;
-    AppControllerServises.render();
+    AppController.render();
   });
 
   toDoVariables.btnActive.addEventListener("click", () => {
     FilterOne.activeFilter = Filter.state.ACTIVE;
 
-    AppControllerServises.render();
+    AppController.render();
   });
 
   toDoVariables.btnCompleted.addEventListener("click", () => {
     FilterOne.activeFilter = Filter.state.INACTIVE;
-    AppControllerServises.render();
+    AppController.render();
   });
 
   toDoVariables.btnAlphaDown.addEventListener("click", () => {
-    AppControllerServises.activeSort = AppController.state.fromZtoA;
-    AppControllerServises.render();
+    AppController.activeSort = App.state.fromZtoA;
+    AppController.render();
   });
 
   toDoVariables.btnAlphaDownAlt.addEventListener("click", () => {
-    AppControllerServises.activeSort = AppController.state.fromAtoZ;
-    AppControllerServises.render();
+    AppController.activeSort = App.state.fromAtoZ;
+    AppController.render();
   });
 };
 
-AppController.prototype.addToDoitem = function (item) {
+App.prototype.addToDoitem = function (item) {
   this.list.push(item);
 };
 
-AppController.prototype.removeItem = function () {
+App.prototype.removeItem = function () {
   [...toDoVariables.lists].forEach((elem) => {
     elem.remove();
   });
 };
 
-AppController.prototype.deleteToDoItemById = function (id) {
+App.prototype.deleteToDoItemById = function (id) {
   this.list = this.list.filter((elem) => elem.id !== id);
   this.render();
 };
 
-AppController.prototype.checkSortList = function (num1, num2) {
-  if (this.activeSort === AppController.state.fromAtoZ) {
-    this.list.sort(function (a, b) {
-      const textA = a.text.toLowerCase();
-      const textB = b.text.toLowerCase();
+App.prototype.checkSortList = function (list) {
+  let num1 = -1;
+  let num2 = 1;
 
-      if (textA < textB) {
-        return num1;
-      }
-      if (textA > textB) {
-        return num2;
-      }
-      return 0;
-    });
+  if (this.activeSort === App.state.fromZtoA) {
+    num1 = 1;
+    num2 = -1;
   }
-};
 
-AppController.prototype.sortList = function (list) {
-  this.checkSortList(-1, 1);
-  this.checkSortList(1, -1);
+  list.sort(function (a, b) {
+    const textA = a.text.toLowerCase();
+    const textB = b.text.toLowerCase();
+
+    if (textA < textB) {
+      return num1;
+    }
+    if (textA > textB) {
+      return num2;
+    }
+    return 0;
+  });
+
   return list;
 };
 
-AppController.prototype.createFragment = function (arr) {
+App.prototype.sortList = function (list) {
+  const sortList = this.checkSortList(list);
+  return sortList;
+};
+
+App.prototype.createFragment = function (arr) {
   const fragment = new DocumentFragment();
 
   arr.forEach(function (elem) {
@@ -115,14 +122,14 @@ AppController.prototype.createFragment = function (arr) {
   return fragment;
 };
 
-AppController.prototype.checkBtnStyle = function (list, elems, elem, cl) {
+App.prototype.checkBtnStyle = function (list, elems, elem, cl) {
   if (list.length >= 0) {
     Filter.deleteBtnClass(elems, cl);
     Filter.addBtnClass(elem, cl);
   }
 };
 
-AppController.prototype.render = function () {
+App.prototype.render = function () {
   this.removeItem();
   PaginationList.removePaginationItem();
 
@@ -146,7 +153,7 @@ AppController.prototype.render = function () {
   this.checkBtnStyle(
     filteredList,
     toDoVariables.sortBtns,
-    toDoVariables.sortBtns[AppControllerServises.activeSort],
+    toDoVariables.sortBtns[AppController.activeSort],
     "sort-btn-current"
   );
 
@@ -174,4 +181,4 @@ AppController.prototype.render = function () {
   localStorage.setItem("activePage", PaginationList.activePage);
 };
 
-var AppControllerServises = new AppController();
+var AppController = new App();

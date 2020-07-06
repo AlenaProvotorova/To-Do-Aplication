@@ -25,12 +25,12 @@ ToDoItem.createToDoElem = function (elem) {
         : Filter.state.INACTIVE;
 
     ToDoItem.toggleStatus(elem, elemIcon, elemText);
-    AppControllerServises.render();
+    AppController.render();
   });
 
   deleteBtn.addEventListener("click", () => {
-    AppControllerServises.deleteToDoItemById(elem.id);
-    AppControllerServises.render();
+    AppController.deleteToDoItemById(elem.id);
+    AppController.render();
   });
 
   return elemLi;

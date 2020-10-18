@@ -54,3 +54,5 @@ Pagination.prototype.getSliceArray = function (arr) {
 };
 
 var PaginationList = new Pagination();
+
+console.log('=======pagination====', );

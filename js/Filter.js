@@ -19,3 +19,5 @@ Filter.addBtnClass = function (elem, cl) {
 };
 
 var FilterOne = new Filter();
+
+console.log('=======hello====', );
